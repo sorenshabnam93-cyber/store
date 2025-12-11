@@ -27,99 +27,148 @@
   <link rel="preload" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900&display=swap"></noscript>
   <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+
+  <style>
+    .sidebar {
+      background-color: rgba(0, 0, 0, 0.4);
+      min-height: 100vh;
+      padding: 2rem 0;
+    }
+    .sidebar .nav-link {
+      color: #fff;
+      font-size: 1.2rem;
+      padding: 0.8rem 1.5rem;
+      border-radius: 0;
+      transition: background 0.3s;
+    }
+    .sidebar .nav-link:hover,
+    .sidebar .nav-link.active {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    .category-section {
+      display: none;
+    }
+    .category-section.active {
+      display: block;
+    }
+    .featured-card {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .featured-card:hover {
+      transform: translateY(-10px);
+    }
+  </style>
 </head>
 <body>
-<!-- Navigation -->
-<section class="menu menu2 cid-tkbL8n4vab" id="menu2-16">
-  <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
-    <div class="container-fluid">
-      <div class="navbar-brand">
-        <span class="navbar-logo">
-          <a href="index.html"><img src="assets/images/cazemc.png" alt="CazeMC Logo" style="height: 3rem;"></a>
-        </span>
-        <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-7" href="index.html">CazeMC.xyz</a></span>
-      </div>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <div class="hamburger"><span></span><span></span><span></span><span></span></div>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav nav-dropdown">
-          <li class="nav-item"><a class="nav-link link text-white display-4" href="index.html#features13-2">What is CazeMC?</a></li>
-          <li class="nav-item"><a class="nav-link link text-white display-4" href="index.html#features24-4">How to Join</a></li>
-          <li class="nav-item"><a class="nav-link link text-white display-4" href="https://discord.gg/6r3qN5KGNk" target="_blank">Support</a></li>
-          <li class="nav-item"><a class="nav-link link text-white display-4" href="rules.html">Rules</a></li>
-        </ul>
-        <div class="navbar-buttons mbr-section-btn">
-          <a class="btn btn-primary display-4" href="store.html">
-            <span class="mobi-mbri mobi-mbri-shopping-basket mbr-iconfont mbr-iconfont-btn"></span> Store
-          </a>
-        </div>
-      </div>
-    </div>
-  </nav>
-</section>
 
-<!-- Hero Section - Updated with new underwater background -->
+<!-- Hero Section with Underwater Background -->
 <section class="header14 cid-tjqpRpO1sc mbr-fullscreen mbr-parallax-background" id="header14-d">
   <div class="mbr-overlay" style="opacity: 0.8; background-color: rgb(1, 17, 26);"></div>
- 
-  <!-- NEW UNDERWATER BACKGROUND (replaces the old one) -->
   <div style="background-image: url('assets/images/underwater-bg.jpg'); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
   
-  <div class="container">
-    <div class="row justify-content-center align-items-center">
-      <div class="col-12 col-md-6 image-wrapper">
-        <img src="assets/images/cazemc.png" alt="CazeMC Store">
+  <div class="container pt-5">
+    <div class="row justify-content-center">
+      <div class="col-12 text-center">
+        <img src="assets/images/cazemc.png" alt="CazeMC Logo" class="img-fluid" style="max-height: 120px;">
+        <h1 class="mbr-section-title mbr-fonts-style display-1 text-white mt-3"><strong>CazeMC Store</strong></h1>
+        <p class="mbr-text mbr-fonts-style display-7 text-white">
+          Support the server and unlock exclusive ranks, coins, keys & more!
+        </p>
+        <a class="btn btn-primary display-4 mt-3" href="https://discord.gg/6r3qN5KGNk" target="_blank">Join Discord</a>
       </div>
-      <div class="col-12 col-md">
-        <div class="text-wrapper">
-          <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1"><strong>CazeMC Store</strong></h1>
-          <p class="mbr-text mbr-fonts-style display-7">
-            Support the server and unlock exclusive ranks, coins, keys & more!
-          </p>
-          <div class="mbr-section-btn mt-3">
-            <a class="btn btn-primary display-4" href="https://discord.gg/6r3qN5KGNk" target="_blank">Join Discord</a>
+    </div>
+  </div>
+</section>
+
+<!-- Main Store Content with Sidebar -->
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-lg-3 col-xl-2 sidebar">
+      <h4 class="text-white text-center mb-4">Categories</h4>
+      <div class="nav flex-column nav-pills">
+        <a class="nav-link active" href="#featured" data-category="featured">Featured</a>
+        <a class="nav-link" href="#ranks" data-category="ranks">Ranks</a>
+        <a class="nav-link" href="#coins" data-category="coins">Coins</a>
+        <a class="nav-link" href="#keys" data-category="keys">Crate Keys</a>
+        <a class="nav-link" href="#queue" data-category="queue">Queue Priority</a>
+        <a class="nav-link" href="#about" data-category="about">About</a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-lg-9 col-xl-10 py-5">
+      <!-- Featured Packages -->
+      <div id="featured" class="category-section active">
+        <h2 class="display-5 text-center mb-5"><strong>Featured Packages</strong></h2>
+        <div class="row g-4 justify-content-center">
+          <div class="col-md-4">
+            <div class="featured-card text-white">
+              <img src="https://via.placeholder.com/150/E91E63/FFFFFF?text=CAZER" alt="CAZER Rank" class="mb-3">
+              <h5>CAZER Rank</h5>
+              <p class="display-6">₹999.00</p>
+              <a href="#" class="btn btn-danger">Buy Now</a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="featured-card text-white">
+              <img src="https://via.placeholder.com/150/9C27B0/FFFFFF?text=Legend+Pack" alt="Legend Pack" class="mb-3">
+              <h5>Legend Coin Pack</h5>
+              <p class="display-6">₹449.00</p>
+              <a href="#" class="btn btn-primary">Buy Now</a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="featured-card text-white">
+              <img src="https://via.placeholder.com/150/E91E63/FFFFFF?text=Legendary+Key" alt="Legendary Key" class="mb-3">
+              <h5>Legendary Key</h5>
+              <p class="display-6">₹199.00</p>
+              <a href="#" class="btn btn-danger">Buy Now</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- Ranks Section (same as your previous store) -->
-<section class="gallery3 cid-store-ranks" id="gallery3-1">
-  <div class="container">
-    <div class="mbr-section-head">
-      <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2"><strong>Ranks</strong></h3>
-      <p class="mbr-text mbr-fonts-style align-center mt-2 display-7">Permanent ranks with awesome perks</p>
-    </div>
-    <div class="row mt-5 g-4">
-      <div class="col-12 col-md-6 col-lg-4">
-        <div class="card-wrapper text-center p-4">
-          <img src="https://via.placeholder.com/150?text=VIP" alt="VIP Rank" class="mb-3">
-          <h5 class="card-title mbr-fonts-style display-5"><strong>VIP Rank</strong></h5>
-          <p class="mbr-text mbr-fonts-style display-4">₹50.00</p>
-          <a href="#" class="btn btn-primary display-4">Add to Cart</a>
-        </div>
-      </セミ</div>
-      <!-- Add the rest of your rank cards here (MVP, ELITE, etc.) -->
-      <!-- Example placeholder for others:
-      <div class="col-12 col-md-6 col-lg-4">
-        <div class="card-wrapper text-center p-4">
-          <img src="https://via.placeholder.com/150?text=MVP" alt="MVP Rank" class="mb-3">
-          <h5 class="card-title mbr-fonts-style display-5"><strong>MVP Rank</strong></h5>
-          <p class="mbr-text mbr-fonts-style display-4">₹100.00</p>
-          <a href="#" class="btn btn-primary display-4">Add to Cart</a>
+      <!-- Ranks Section -->
+      <div id="ranks" class="category-section">
+        <h2 class="display-5 text-center mb-5"><strong>Ranks</strong></h2>
+        <!-- Same rank cards as before -->
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card text-center bg-dark text-white border-0 shadow">
+              <div class="card-body">
+                <img src="https://via.placeholder.com/150/4CAF50/FFFFFF?text=VIP" class="rounded-circle mb-3">
+                <h5>VIP Rank</h5>
+                <p class="display-6 text-success">₹99.00</p>
+                <a href="#" class="btn btn-success">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+          <!-- Add other ranks similarly -->
         </div>
       </div>
-      -->
+
+      <!-- Coins, Keys, etc. sections follow the same pattern -->
+      <!-- (Copy the previous sections and wrap them in divs with correct IDs) -->
+
+      <!-- About Section -->
+      <div id="about" class="category-section">
+        <h2 class="display-5 text-center mb-5"><strong>About the Store</strong></h2>
+        <div class="text-center text-white">
+          <p class="lead">Welcome to the official CazeMC Store!</p>
+          <p>All purchases support the server and help us keep improving the experience for everyone.</p>
+          <p>Need help? Join our <a href="https://discord.gg/6r3qN5KGNk" class="text-primary">Discord</a> for support.</p>
+        </div>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- You can add Money Packages, Coins & Keys sections here by copying from your old store.html -->
-
-<!-- Footer (same as homepage) -->
+<!-- Footer -->
 <section class="footer1 cid-tkbGMWG3Nn" id="footer01-15">
   <div class="container">
     <div class="row justify-content-center">
@@ -146,5 +195,19 @@
 <script src="assets/smoothscroll/smooth-scroll.js"></script>
 <script src="assets/dropdown/js/navbar-dropdown.js"></script>
 <script src="assets/theme/js/script.js"></script>
+
+<script>
+  document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelectorAll('.sidebar .nav-link').forEach(l => l.classList.remove('active'));
+      this.classList.add('active');
+      
+      const category = this.getAttribute('data-category');
+      document.querySelectorAll('.category-section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(category).classList.add('active');
+    });
+  });
+</script>
 </body>
 </html>
