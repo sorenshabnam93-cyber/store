@@ -27,12 +27,44 @@
   <link rel="preload" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900&display=swap"></noscript>
   <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+
+  <style>
+    /* Small cart-specific styling */
+    .cart-badge {
+      position: relative;
+    }
+    .cart-count {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      background: #dc3545;
+      color: #fff;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 0.75rem;
+      line-height: 1;
+    }
+    .cart-item-img {
+      width: 56px;
+      height: 56px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+    .card-wrapper .btn {
+      min-width: 120px;
+    }
+    .text-right { text-align: right; }
+    .offcanvas-footer {
+      padding: 1rem;
+      border-top: 1px solid #e9ecef;
+    }
+  </style>
 </head>
 <body>
 
 <!-- Navigation (same as your homepage) -->
 <section class="menu menu2 cid-tkbL8n4vab" id="menu2-16">
-  <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
+  <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <div class="navbar-brand">
         <span class="navbar-logo">
@@ -40,25 +72,55 @@
         </span>
         <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-7" href="index.html">CazeMC.xyz</a></span>
       </div>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <div class="hamburger"><span></span><span></span><span></span><span></span></div>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav nav-dropdown">
+        <ul class="navbar-nav nav-dropdown me-auto">
           <li class="nav-item"><a class="nav-link link text-white display-4" href="index.html#features13-2">What is CazeMC?</a></li>
           <li class="nav-item"><a class="nav-link link text-white display-4" href="index.html#features24-4">How to Join</a></li>
           <li class="nav-item"><a class="nav-link link text-white display-4" href="https://discord.gg/6r3qN5KGNk" target="_blank">Support</a></li>
           <li class="nav-item"><a class="nav-link link text-white display-4" href="rules.html">Rules</a></li>
         </ul>
-        <div class="navbar-buttons mbr-section-btn">
-          <a class="btn btn-primary display-4" href="store.html">
+        <div class="navbar-buttons mbr-section-btn d-flex align-items-center">
+          <a class="btn btn-primary me-3 display-4" href="store.html">
             <span class="mobi-mbri mobi-mbri-shopping-basket mbr-iconfont mbr-iconfont-btn"></span> Store
           </a>
+
+          <!-- Cart Button -->
+          <button class="btn btn-outline-light cart-badge" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas" id="openCartBtn">
+            <span class="mobi-mbri mobi-mbri-cart mbr-iconfont" style="font-size:1.1rem;"></span>
+            <span class="cart-count" id="cartCount">0</span>
+          </button>
         </div>
       </div>
     </div>
   </nav>
 </section>
+
+<!-- Cart Offcanvas -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="cartOffcanvasLabel">Your Cart</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body p-0">
+    <div id="cartItems" class="list-group list-group-flush">
+      <!-- Cart items will be injected here -->
+    </div>
+  </div>
+  <div class="offcanvas-footer">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <strong>Subtotal:</strong>
+      <div id="cartSubtotal">₹0.00</div>
+    </div>
+    <div class="d-flex gap-2">
+      <button class="btn btn-secondary w-100" id="clearCartBtn">Clear Cart</button>
+      <button class="btn btn-primary w-100" id="checkoutBtn">Checkout</button>
+    </div>
+  </div>
+</div>
 
 <!-- Hero Banner -->
 <section class="header14 cid-storehero mbr-fullscreen mbr-parallax-background">
@@ -66,7 +128,7 @@
   <div class="container">
     <div class="row justify-content-center align-items-center">
       <div class="col-12 col-md-6 image-wrapper">
-        <img src="assets/images/cazemc.png" alt="CazeMC Store">
+        <img src="assets/images/cazemc.png" alt="CazeMC Store" class="img-fluid">
       </div>
       <div class="col-12 col-md">
         <div class="text-wrapper">
@@ -93,42 +155,57 @@
     <div class="row mt-5 g-4">
       <div class="col-12 col-md-6 col-lg-4">
         <div class="card-wrapper text-center p-4">
-          <img src="https://via.placeholder.com/150?text=VIP" alt="VIP Rank" class="mb-3">
+          <img src="https://via.placeholder.com/150?text=VIP" alt="VIP Rank" class="mb-3 img-fluid">
           <h5 class="card-title mbr-fonts-style display-5"><strong>VIP Rank</strong></h5>
           <p class="mbr-text mbr-fonts-style display-4">₹50.00</p>
-          <a href="#" class="btn btn-primary display-4">Add to Cart</a>
+          <button type="button" class="btn btn-primary display-4 add-to-cart"
+                  data-id="rank-vip" data-name="VIP Rank" data-price="50.00" data-img="https://via.placeholder.com/150?text=VIP">
+            Add to Cart
+          </button>
         </div>
       </div>
       <div class="col-12 col-md-6 col-lg-4">
         <div class="card-wrapper text-center p-4">
-          <img src="https://via.placeholder.com/150?text=MVP" alt="MVP Rank" class="mb-3">
+          <img src="https://via.placeholder.com/150?text=MVP" alt="MVP Rank" class="mb-3 img-fluid">
           <h5 class="card-title mbr-fonts-style display-5"><strong>MVP Rank</strong></h5>
           <p class="mbr-text mbr-fonts-style display-4">₹100.00</p>
-          <a href="#" class="btn btn-primary display-4">Add to Cart</a>
+          <button type="button" class="btn btn-primary display-4 add-to-cart"
+                  data-id="rank-mvp" data-name="MVP Rank" data-price="100.00" data-img="https://via.placeholder.com/150?text=MVP">
+            Add to Cart
+          </button>
         </div>
       </div>
       <div class="col-12 col-md-6 col-lg-4">
         <div class="card-wrapper text-center p-4">
-          <img src="https://via.placeholder.com/150?text=ELITE" alt="ELITE Rank" class="mb-3">
+          <img src="https://via.placeholder.com/150?text=ELITE" alt="ELITE Rank" class="mb-3 img-fluid">
           <h5 class="card-title mbr-fonts-style display-5"><strong>ELITE Rank</strong></h5>
           <p class="mbr-text mbr-fonts-style display-4">₹150.00</p>
-          <a href="#" class="btn btn-primary display-4">Add to Cart</a>
+          <button type="button" class="btn btn-primary display-4 add-to-cart"
+                  data-id="rank-elite" data-name="ELITE Rank" data-price="150.00" data-img="https://via.placeholder.com/150?text=ELITE">
+            Add to Cart
+          </button>
         </div>
       </div>
       <div class="col-12 col-md-6 col-lg-4">
         <div class="card-wrapper text-center p-4">
-          <img src="https://via.placeholder.com/150?text=IMMORTAL" alt="IMMORTAL Rank" class="mb-3">
+          <img src="https://via.placeholder.com/150?text=IMMORTAL" alt="IMMORTAL Rank" class="mb-3 img-fluid">
           <h5 class="card-title mbr-fonts-style display-5"><strong>IMMORTAL Rank</strong></h5>
           <p class="mbr-text mbr-fonts-style display-4">₹200.00</p>
-          <a href="#" class="btn btn-primary display-4">Add to Cart</a>
+          <button type="button" class="btn btn-primary display-4 add-to-cart"
+                  data-id="rank-immortal" data-name="IMMORTAL Rank" data-price="200.00" data-img="https://via.placeholder.com/150?text=IMMORTAL">
+            Add to Cart
+          </button>
         </div>
       </div>
       <div class="col-12 col-md-6 col-lg-4">
         <div class="card-wrapper text-center p-4">
-          <img src="https://via.placeholder.com/150?text=CAZER" alt="CAZER Rank" class="mb-3">
+          <img src="https://via.placeholder.com/150?text=CAZER" alt="CAZER Rank" class="mb-3 img-fluid">
           <h5 class="card-title mbr-fonts-style display-5"><strong>CAZER Rank</strong></h5>
           <p class="mbr-text mbr-fonts-style display-4">₹250.00</p>
-          <a href="#" class="btn btn-primary display-4">Add to Cart</a>
+          <button type="button" class="btn btn-primary display-4 add-to-cart"
+                  data-id="rank-cazer" data-name="CAZER Rank" data-price="250.00" data-img="https://via.placeholder.com/150?text=CAZER">
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>
@@ -144,42 +221,42 @@
     <div class="row mt-5 g-4">
       <div class="col-12 col-md-6 col-lg-3">
         <div class="card-wrapper text-center p-4">
-          <img src="https://via.placeholder.com/120?text=1M" alt="1 Million" class="mb-3">
+          <img src="https://via.placeholder.com/120?text=1M" alt="1 Million" class="mb-3 img-fluid">
           <h5 class="card-title mbr-fonts-style display-5">1 Million</h5>
           <p class="mbr-text mbr-fonts-style display-4">₹40.00</p>
-          <a href="#" class="btn btn-primary display-4">Add</a>
+          <button class="btn btn-primary display-4 add-to-cart" data-id="money-1m" data-name="1 Million" data-price="40.00" data-img="https://via.placeholder.com/120?text=1M">Add</button>
         </div>
       </div>
       <div class="col-12 col-md-6 col-lg-3">
         <div class="card-wrapper text-center p-4">
-          <img src="https://via.placeholder.com/120?text=2M" alt="2 Million" class="mb-3">
+          <img src="https://via.placeholder.com/120?text=2M" alt="2 Million" class="mb-3 img-fluid">
           <h5 class="card-title mbr-fonts-style display-5">2 Million</h5>
           <p class="mbr-text mbr-fonts-style display-4">₹85.00</p>
-          <a href="#" class="btn btn-primary display-4">Add</a>
+          <button class="btn btn-primary display-4 add-to-cart" data-id="money-2m" data-name="2 Million" data-price="85.00" data-img="https://via.placeholder.com/120?text=2M">Add</button>
         </div>
       </div>
       <div class="col-12 col-md-6 col-lg-3">
         <div class="card-wrapper text-center p-4">
-          <img src="https://via.placeholder.com/120?text=4M" alt="4 Million" class="mb-3">
+          <img src="https://via.placeholder.com/120?text=4M" alt="4 Million" class="mb-3 img-fluid">
           <h5 class="card-title mbr-fonts-style display-5">4 Million</h5>
           <p class="mbr-text mbr-fonts-style display-4">₹160.00</p>
-          <a href="#" class="btn btn-primary display-4">Add</a>
+          <button class="btn btn-primary display-4 add-to-cart" data-id="money-4m" data-name="4 Million" data-price="160.00" data-img="https://via.placeholder.com/120?text=4M">Add</button>
         </div>
       </div>
       <div class="col-12 col-md-6 col-lg-3">
         <div class="card-wrapper text-center p-4">
-          <img src="https://via.placeholder.com/120?text=8M" alt="8 Million" class="mb-3">
+          <img src="https://via.placeholder.com/120?text=8M" alt="8 Million" class="mb-3 img-fluid">
           <h5 class="card-title mbr-fonts-style display-5">8 Million</h5>
           <p class="mbr-text mbr-fonts-style display-4">₹300.00</p>
-          <a href="#" class="btn btn-primary display-4">Add</a>
+          <button class="btn btn-primary display-4 add-to-cart" data-id="money-8m" data-name="8 Million" data-price="300.00" data-img="https://via.placeholder.com/120?text=8M">Add</button>
         </div>
       </div>
       <div class="col-12 col-md-6 col-lg-3 offset-lg-3">
         <div class="card-wrapper text-center p-4">
-          <img src="https://via.placeholder.com/120?text=16M" alt="16 Million" class="mb-3">
+          <img src="https://via.placeholder.com/120?text=16M" alt="16 Million" class="mb-3 img-fluid">
           <h5 class="card-title mbr-fonts-style display-5">16 Million</h5>
           <p class="mbr-text mbr-fonts-style display-4">₹580.00</p>
-          <a href="#" class="btn btn-primary display-4">Add</a>
+          <button class="btn btn-primary display-4 add-to-cart" data-id="money-16m" data-name="16 Million" data-price="580.00" data-img="https://via.placeholder.com/120?text=16M">Add</button>
         </div>
       </div>
     </div>
@@ -195,11 +272,50 @@
           <h3 class="mbr-section-title mbr-fonts-style mb-0 display-2"><strong>Coins</strong></h3>
         </div>
         <div class="row mt-4 g-4">
-          <div class="col-12 col-md-6"><div class="card-wrapper text-center p-4"><img src="https://via.placeholder.com/100?text=100" class="mb-3"><h5>100 Coins</h5><p>₹20.00</p><a href="#" class="btn btn-primary">Add</a></div></div>
-          <div class="col-12 col-md-6"><div class="card-wrapper text-center p-4"><img src="https://via.placeholder.com/100?text=500" class="mb-3"><h5>500 Coins</h5><p>₹40.00</p><a href="#" class="btn btn-primary">Add</a></div></div>
-          <div class="col-12 col-md-6"><div class="card-wrapper text-center p-4"><img src="https://via.placeholder.com/100?text=1000" class="mb-3"><h5>1000 Coins</h5><p>₹90.00</p><a href="#" class="btn btn-primary">Add</a></div></div>
-          <div class="col-12 col-md-6"><div class="card-wrapper text-center p-4"><img src="https://via.placeholder.com/100?text=1500" class="mb-3"><h5>1500 Coins</h5><p>₹130.00</p><a href="#" class="btn btn-primary">Add</a></div></div>
-          <div class="col-12 col-md-6 offset-md-3"><div class="card-wrapper text-center p-4"><img src="https://via.placeholder.com/100?text=2000" class="mb-3"><h5>2000 Coins</h5><p>₹180.00</p><a href="#" class="btn btn-primary">Add</a></div></div>
+          <div class="col-12 col-md-6">
+            <div class="card-wrapper text-center p-4">
+              <img src="https://via.placeholder.com/100?text=100" class="mb-3 img-fluid" alt="100 Coins">
+              <h5>100 Coins</h5>
+              <p>₹20.00</p>
+              <button class="btn btn-primary add-to-cart" data-id="coins-100" data-name="100 Coins" data-price="20.00" data-img="https://via.placeholder.com/100?text=100">Add</button>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="card-wrapper text-center p-4">
+              <img src="https://via.placeholder.com/100?text=500" class="mb-3 img-fluid" alt="500 Coins">
+              <h5>500 Coins</h5>
+              <p>₹40.00</p>
+              <button class="btn btn-primary add-to-cart" data-id="coins-500" data-name="500 Coins" data-price="40.00" data-img="https://via.placeholder.com/100?text=500">Add</button>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="card-wrapper text-center p-4">
+              <img src="https://via.placeholder.com/100?text=1000" class="mb-3 img-fluid" alt="1000 Coins">
+              <h5>1000 Coins</h5>
+              <p>₹90.00</p>
+              <button class="btn btn-primary add-to-cart" data-id="coins-1000" data-name="1000 Coins" data-price="90.00" data-img="https://via.placeholder.com/100?text=1000">Add</button>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="card-wrapper text-center p-4">
+              <img src="https://via.placeholder.com/100?text=1500" class="mb-3 img-fluid" alt="1500 Coins">
+              <h5>1500 Coins</h5>
+              <p>₹130.00</p>
+              <button class="btn btn-primary add-to-cart" data-id="coins-1500" data-name="1500 Coins" data-price="130.00" data-img="https://via.placeholder.com/100?text=1500">Add</button>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 offset-md-3">
+            <div class="card-wrapper text-center p-4">
+              <img src="https://via.placeholder.com/100?text=2000" class="mb-3 img-fluid" alt="2000 Coins">
+              <h5>2000 Coins</h5>
+              <p>₹180.00</p>
+              <button class="btn btn-primary add-to-cart" data-id="coins-2000" data-name="2000 Coins" data-price="180.00" data-img="https://via.placeholder.com/100?text=2000">Add</button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -208,15 +324,55 @@
           <h3 class="mbr-section-title mbr-fonts-style mb-0 display-2"><strong>Crate Keys (Free)</strong></h3>
         </div>
         <div class="row mt-4 g-4">
-          <div class="col-12 col-md-6"><div class="card-wrapper text-center p-4"><img src="https://via.placeholder.com/100?text=Key+1" class="mb-3"><h5>1 Key</h5><p>Free</p><a href="#" class="btn btn-success">Add</a></div></div>
-          <div class="col-12 col-md-6"><div class="card-wrapper text-center p-4"><img src="https://via.placeholder.com/100?text=Key+2" class="mb-3"><h5>2 Keys</h5><p>Free</p><a href="#" class="btn btn-success">Add</a></div></div>
-          <div class="col-12 col-md-6"><div class="card-wrapper text-center p-4"><img src="https://via.placeholder.com/100?text=Key+3" class="mb-3"><h5>3 Keys</h5><p>Free</p><a href="#" class="btn btn-success">Add</a></div></div>
-          <div class="col-12 col-md-6"><div class="card-wrapper text-center p-4"><img src="https://via.placeholder.com/100?text=Key+4" class="mb-3"><h5>4 Keys</h5><p>Free</p><a href="#" class="btn btn-success">Add</a></div></div>
-          <div class="col-12 col-md-6 offset-md-3"><div class="card-wrapper text-center p-4"><img src="https://via.placeholder.com/100?text=Key+5" class="mb-3"><h5>5 Keys</h5><p>Free</p><a href="#" class="btn btn-success">Add</a></div></div>
+          <div class="col-12 col-md-6">
+            <div class="card-wrapper text-center p-4">
+              <img src="https://via.placeholder.com/100?text=Key+1" class="mb-3 img-fluid" alt="1 Key">
+              <h5>1 Key</h5>
+              <p>Free</p>
+              <button class="btn btn-outline-primary add-to-cart" data-id="key-1" data-name="1 Key" data-price="0.00" data-img="https://via.placeholder.com/100?text=Key+1">Add</button>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="card-wrapper text-center p-4">
+              <img src="https://via.placeholder.com/100?text=Key+2" class="mb-3 img-fluid" alt="2 Keys">
+              <h5>2 Keys</h5>
+              <p>Free</p>
+              <button class="btn btn-outline-primary add-to-cart" data-id="key-2" data-name="2 Keys" data-price="0.00" data-img="https://via.placeholder.com/100?text=Key+2">Add</button>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="card-wrapper text-center p-4">
+              <img src="https://via.placeholder.com/100?text=Key+3" class="mb-3 img-fluid" alt="3 Keys">
+              <h5>3 Keys</h5>
+              <p>Free</p>
+              <button class="btn btn-outline-primary add-to-cart" data-id="key-3" data-name="3 Keys" data-price="0.00" data-img="https://via.placeholder.com/100?text=Key+3">Add</button>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="card-wrapper text-center p-4">
+              <img src="https://via.placeholder.com/100?text=Key+4" class="mb-3 img-fluid" alt="4 Keys">
+              <h5>4 Keys</h5>
+              <p>Free</p>
+              <button class="btn btn-outline-primary add-to-cart" data-id="key-4" data-name="4 Keys" data-price="0.00" data-img="https://via.placeholder.com/100?text=Key+4">Add</button>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 offset-md-3">
+            <div class="card-wrapper text-center p-4">
+              <img src="https://via.placeholder.com/100?text=Key+5" class="mb-3 img-fluid" alt="5 Keys">
+              <h5>5 Keys</h5>
+              <p>Free</p>
+              <button class="btn btn-outline-primary add-to-cart" data-id="key-5" data-name="5 Keys" data-price="0.00" data-img="https://via.placeholder.com/100?text=Key+5">Add</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
 </section>
 
 <!-- Footer (same as homepage) -->
@@ -245,5 +401,180 @@
 <script src="assets/smoothscroll/smooth-scroll.js"></script>
 <script src="assets/dropdown/js/navbar-dropdown.js"></script>
 <script src="assets/theme/js/script.js"></script>
+
+<script>
+  // Simple cart system using localStorage
+  (function () {
+    const STORAGE_KEY = 'cazemc_cart_v1';
+
+    let cart = [];
+
+    function loadCart() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        cart = raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        console.error('Failed to load cart', e);
+        cart = [];
+      }
+    }
+
+    function saveCart() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+      renderCart();
+      updateBadge();
+    }
+
+    function updateBadge() {
+      const count = cart.reduce((sum, it) => sum + it.qty, 0);
+      document.getElementById('cartCount').textContent = count;
+    }
+
+    function formatCurrency(amount) {
+      // Keep rupee symbol shown and two decimals
+      return '₹' + Number(amount || 0).toFixed(2);
+    }
+
+    function addToCart(item) {
+      const existing = cart.find(i => i.id === item.id);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push(Object.assign({}, item, { qty: 1 }));
+      }
+      saveCart();
+    }
+
+    function removeFromCart(id) {
+      cart = cart.filter(i => i.id !== id);
+      saveCart();
+    }
+
+    function updateQty(id, qty) {
+      const item = cart.find(i => i.id === id);
+      if (!item) return;
+      item.qty = Math.max(0, Number(qty) || 0);
+      if (item.qty === 0) removeFromCart(id);
+      else saveCart();
+    }
+
+    function clearCart() {
+      cart = [];
+      saveCart();
+    }
+
+    function cartSubtotal() {
+      return cart.reduce((sum, it) => sum + (Number(it.price) * it.qty), 0);
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cartItems');
+      container.innerHTML = '';
+      if (cart.length === 0) {
+        container.innerHTML = '<div class="p-3 text-center text-muted">Your cart is empty.</div>';
+      } else {
+        cart.forEach(item => {
+          const itemEl = document.createElement('div');
+          itemEl.className = 'list-group-item d-flex align-items-center';
+          itemEl.innerHTML = `
+            <img src="${escapeHtml(item.img || 'https://via.placeholder.com/56')}" class="cart-item-img me-3" alt="${escapeHtml(item.name)}">
+            <div class="flex-grow-1">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="fw-bold">${escapeHtml(item.name)}</div>
+                  <small class="text-muted">${formatCurrency(item.price)} each</small>
+                </div>
+                <div class="text-right">
+                  <div class="mb-2 fw-bold">${formatCurrency(item.price * item.qty)}</div>
+                </div>
+              </div>
+              <div class="d-flex align-items-center gap-2 mt-2">
+                <input type="number" min="0" class="form-control form-control-sm" value="${item.qty}" style="width:80px" data-id="${escapeHtml(item.id)}">
+                <button class="btn btn-sm btn-outline-danger ms-2 remove-btn" data-id="${escapeHtml(item.id)}">Remove</button>
+              </div>
+            </div>
+          `;
+          container.appendChild(itemEl);
+
+          // attach events
+          const qtyInput = itemEl.querySelector('input[type="number"]');
+          qtyInput.addEventListener('change', (e) => {
+            updateQty(item.id, e.target.value);
+          });
+          const removeBtn = itemEl.querySelector('.remove-btn');
+          removeBtn.addEventListener('click', () => {
+            removeFromCart(item.id);
+          });
+        });
+      }
+
+      // subtotal
+      document.getElementById('cartSubtotal').textContent = formatCurrency(cartSubtotal());
+    }
+
+    function escapeHtml(s) {
+      if (!s) return '';
+      return String(s).replace(/[&<>"']/g, function (m) {
+        return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m];
+      });
+    }
+
+    // Wire Add to Cart buttons
+    function initAddButtons() {
+      document.querySelectorAll('.add-to-cart').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const el = e.currentTarget;
+          const id = el.getAttribute('data-id') || ('prod-' + Date.now());
+          const name = el.getAttribute('data-name') || 'Item';
+          const price = parseFloat(el.getAttribute('data-price') || '0') || 0;
+          const img = el.getAttribute('data-img') || '';
+          addToCart({ id, name, price, img });
+          // open cart for visibility
+          const offcanvasEl = document.getElementById('cartOffcanvas');
+          const offcanvas = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
+          offcanvas.show();
+        });
+      });
+    }
+
+    // Checkout handler (placeholder)
+    function initCheckout() {
+      document.getElementById('checkoutBtn').addEventListener('click', () => {
+        if (cart.length === 0) {
+          alert('Your cart is empty.');
+          return;
+        }
+        // Placeholder behavior: show order summary and clear cart.
+        const itemsList = cart.map(i => `${i.qty} × ${i.name} — ${formatCurrency(i.price * i.qty)}`).join('\n');
+        const total = formatCurrency(cartSubtotal());
+        // In a real store you'd integrate payments here.
+        if (confirm(`Confirm purchase:\n\n${itemsList}\n\nTotal: ${total}\n\nThis is a demo checkout. Proceed?`)) {
+          // simulate success
+          alert('Thank you! Your order has been placed (demo).');
+          clearCart();
+          const offcanvasEl = document.getElementById('cartOffcanvas');
+          const offcanvas = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
+          offcanvas.hide();
+        }
+      });
+
+      document.getElementById('clearCartBtn').addEventListener('click', () => {
+        if (confirm('Clear your cart?')) {
+          clearCart();
+        }
+      });
+    }
+
+    // initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      loadCart();
+      initAddButtons();
+      initCheckout();
+      renderCart();
+      updateBadge();
+    });
+
+  })();
+</script>
 </body>
 </html>
