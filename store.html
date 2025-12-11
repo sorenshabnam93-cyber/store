@@ -537,25 +537,15 @@
       });
     }
 
-    // Checkout handler (placeholder)
+    // Checkout handler (redirect to Discord invite)
     function initCheckout() {
       document.getElementById('checkoutBtn').addEventListener('click', () => {
         if (cart.length === 0) {
           alert('Your cart is empty.');
           return;
         }
-        // Placeholder behavior: show order summary and clear cart.
-        const itemsList = cart.map(i => `${i.qty} × ${i.name} — ${formatCurrency(i.price * i.qty)}`).join('\n');
-        const total = formatCurrency(cartSubtotal());
-        // In a real store you'd integrate payments here.
-        if (confirm(`Confirm purchase:\n\n${itemsList}\n\nTotal: ${total}\n\nThis is a demo checkout. Proceed?`)) {
-          // simulate success
-          alert('Thank you! Your order has been placed (demo).');
-          clearCart();
-          const offcanvasEl = document.getElementById('cartOffcanvas');
-          const offcanvas = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
-          offcanvas.hide();
-        }
+        // Redirect users to your Discord invite
+        window.location.href = 'https://discord.gg/WPrvx8rQ2k';
       });
 
       document.getElementById('clearCartBtn').addEventListener('click', () => {
